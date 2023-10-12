@@ -11,7 +11,7 @@ struct ContentView: View {
   @State var password2: String = ""
   
   private var canContinue: Bool {
-    password1 == password2 && password1.count >= 8
+    password1 == password2 && password1.count >= 8 && password1.count <= 12
   }
   
     var body: some View {
