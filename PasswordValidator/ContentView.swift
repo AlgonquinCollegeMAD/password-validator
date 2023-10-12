@@ -1,19 +1,30 @@
-//
-//  ContentView.swift
-//  PasswordValidator
-//
-//  Created by Vladimir Cezar on 2023-10-12.
-//
-
 import SwiftUI
 
+enum PasswordValidatorStatus {
+  case matched
+  case error
+}
+
 struct ContentView: View {
+  
+  @State var password1: String = ""
+  @State var password2: String = ""
+  
+  private var canContinue: Bool {
+    password1.count > 0 && password1 == password2
+  }
+  
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+          TextField("Enter your password", text: $password1)
+          TextField("Retype your password", text: $password2)
+          if canContinue {
+            Button(action: {
+              // Do Something
+            }, label: {
+              Text("Ok")
+            })
+          }
         }
         .padding()
     }
