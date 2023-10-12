@@ -17,7 +17,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
           TextField("Enter your password", text: $password1)
+            .textFieldStyle(.roundedBorder)
           TextField("Retype your password", text: $password2)
+            .textFieldStyle(.roundedBorder)
           if canContinue {
             Button(action: {
               // Do Something
