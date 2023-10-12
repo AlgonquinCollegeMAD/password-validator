@@ -16,9 +16,9 @@ struct ContentView: View {
   
     var body: some View {
         VStack {
-          TextField("Enter your password", text: $password1)
+          SecureField("Enter your password", text: $password1)
             .textFieldStyle(.roundedBorder)
-          TextField("Retype your password", text: $password2)
+          SecureField("Retype your password", text: $password2)
             .textFieldStyle(.roundedBorder)
          
             Button(action: {
