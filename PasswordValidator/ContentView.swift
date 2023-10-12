@@ -1,8 +1,8 @@
 import SwiftUI
 
-enum PasswordValidatorStatus {
+enum PasswordValidatorStatus: Equatable {
   case matched
-  case error
+  case error(String)
 }
 
 struct ContentView: View {
@@ -10,8 +10,13 @@ struct ContentView: View {
   @State var password1: String = ""
   @State var password2: String = ""
   
-  private var canContinue: Bool {
-    password1 == password2 && password1.count >= 8 && password1.count <= 12
+  private var passwordValidationStatus: PasswordValidatorStatus {
+    
+    if password1.count < 8 { return .error("It must have more than 8 chars")}
+    if password1.count > 12 { return .error("It must have less than 12 chars")}
+    if password1 != password2 { return .error("Passwords don't match")}
+    
+    return .matched
   }
   
     var body: some View {
@@ -21,10 +26,17 @@ struct ContentView: View {
           SecureField("Retype your password", text: $password2)
             .textFieldStyle(.roundedBorder)
           
-          Text("Message")
-            .fontWeight(.bold)
-            .foregroundStyle(.red)
-            .padding(.top, 40)
+          if case .error(let message) = passwordValidationStatus {
+            Text(message)
+              .font(.headline)
+              .foregroundStyle(.red)
+              .padding(.top, 40)
+              .frame(height: 40)
+          } else {
+            Rectangle()
+              .frame(height: 40)
+              .foregroundColor(.clear)
+          }
          
             Button(action: {
               // Do Something
@@ -42,8 +54,7 @@ struct ContentView: View {
                 )
                 .padding(.top, 40)
             })
-            .disabled(!canContinue)
-          
+            .disabled(passwordValidationStatus != .matched)
         }
         .padding()
     }
