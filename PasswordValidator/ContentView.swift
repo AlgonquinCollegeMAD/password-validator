@@ -20,6 +20,11 @@ struct ContentView: View {
             .textFieldStyle(.roundedBorder)
           SecureField("Retype your password", text: $password2)
             .textFieldStyle(.roundedBorder)
+          
+          Text("Message")
+            .fontWeight(.bold)
+            .foregroundStyle(.red)
+            .padding(.top, 40)
          
             Button(action: {
               // Do Something
