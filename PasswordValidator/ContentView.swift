@@ -25,6 +25,17 @@ struct ContentView: View {
               // Do Something
             }, label: {
               Text("Ok")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundStyle(.white)
+                .padding()
+                .padding(.horizontal, 20)
+                .background(
+                  Color.accentColor
+                    .cornerRadius(10.0)
+                    .shadow(radius: 3.0)
+                )
+                .padding(.top, 40)
             })
           }
         }
