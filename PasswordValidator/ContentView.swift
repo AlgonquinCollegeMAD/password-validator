@@ -11,7 +11,7 @@ struct ContentView: View {
   @State var password2: String = ""
   
   private var canContinue: Bool {
-    password1.count > 0 && password1 == password2
+    password1 == password2 && password1.count > 0
   }
   
     var body: some View {
@@ -20,7 +20,7 @@ struct ContentView: View {
             .textFieldStyle(.roundedBorder)
           TextField("Retype your password", text: $password2)
             .textFieldStyle(.roundedBorder)
-          if canContinue {
+         
             Button(action: {
               // Do Something
             }, label: {
@@ -37,7 +37,8 @@ struct ContentView: View {
                 )
                 .padding(.top, 40)
             })
-          }
+            .disabled(canContinue)
+          
         }
         .padding()
     }
